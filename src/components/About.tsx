@@ -24,8 +24,8 @@ export const About = () => {
                                 transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
                                 className="absolute -right-4 top-1/4 glass-card p-4 border border-primary/20 shadow-xl shadow-primary/10"
                             >
-                                <p className="text-xs text-zinc-400 font-bold uppercase tracking-widest mb-1">Passionate about</p>
-                                <p className="text-lg font-bold text-gradient">AI Engineering</p>
+                                <p className="text-xs text-zinc-400 font-bold uppercase tracking-widest mb-1">Co-Founder &amp; CEO</p>
+                                <p className="text-lg font-bold text-gradient">Ziyaan Technologies</p>
                             </motion.div>
 
                             <motion.div
@@ -33,8 +33,8 @@ export const About = () => {
                                 transition={{ duration: 4, repeat: Infinity }}
                                 className="absolute -left-4 bottom-1/4 glass-card p-4 border border-primary/20 shadow-xl shadow-primary/10"
                             >
-                                <p className="text-xs text-zinc-400 font-bold uppercase tracking-widest mb-1">Focusing on</p>
-                                <p className="text-lg font-bold text-gradient">System Reliability</p>
+                                <p className="text-xs text-zinc-400 font-bold uppercase tracking-widest mb-1">Building with</p>
+                                <p className="text-lg font-bold text-gradient">Clean Architecture</p>
                             </motion.div>
                         </div>
                     </motion.div>
@@ -46,7 +46,7 @@ export const About = () => {
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-8 italic">Passionate About Building <span className="text-gradient">Impactful Solutions</span></h2>
                         <p className="text-zinc-400 text-lg leading-relaxed mb-8">
-                            I am a Bachelor of Science in Software Engineering student (Class of 2026) with a deep passion for creating clean, reliable systems. Currently honing my skills as an AI Engineering Intern at SDSS, I focus on exploring machine learning concepts and delivering high-quality prototypes.
+                            I am a Software Engineering graduate and Co-Founder &amp; CEO of Ziyaan Technologies, a software company building mobile, desktop, and web solutions for businesses and government institutions. I take products from requirements through design, development, and deployment — with Android apps published on Google Play and multiple government and business systems delivered to live clients.
                         </p>
                         <div className="space-y-6">
                             <div className="flex gap-4">
@@ -64,7 +64,7 @@ export const About = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-white mb-1">Problem Solver</h4>
-                                    <p className="text-zinc-400 text-sm">Known for a track record of building production-ready apps in real business environments.</p>
+                                    <p className="text-zinc-400 text-sm">Focused on solving real workflow problems with practical, user-friendly software.</p>
                                 </div>
                             </div>
                         </div>

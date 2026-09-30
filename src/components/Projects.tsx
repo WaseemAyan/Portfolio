@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { LucideIcon } from 'lucide-react';
 import {
+    Bot,
     Building2,
     CalendarCheck,
     Coffee,
@@ -10,8 +11,23 @@ import {
     Landmark,
     Play,
     Smartphone,
+    TrafficCone,
     Utensils
 } from 'lucide-react';
+import cafeBaldiaImg from '../assets/projects/cafe-baldia.png';
+import chamanBazarImg from '../assets/projects/chaman-bazar.png';
+import gkbBanquetImg from '../assets/projects/gkb-banquet.png';
+import humkaamAndroidImg from '../assets/projects/humkaam-android.png';
+import humkaamWebImg from '../assets/projects/humkaam-web.png';
+import pakwanImg from '../assets/projects/pakwan-management.png';
+import safeCityImg from '../assets/projects/safecity-anpr.png';
+import studyBuddyImg from '../assets/projects/study-buddy.png';
+
+type ProjectImage = {
+    src: string;
+    alt: string;
+    portrait?: boolean;
+};
 
 type Project = {
     title: string;
@@ -19,6 +35,7 @@ type Project = {
     description: string;
     tech: string[];
     icon: LucideIcon;
+    images?: ProjectImage[];
     featured?: boolean;
     client?: string;
     badge?: string;
@@ -35,6 +52,10 @@ const projects: Project[] = [
         description: "Pakistan's #1 verified professionals network — connects clients with ID-verified, background-checked plumbers, electricians, tutors, and nurses.",
         tech: ["Kotlin", "Jetpack Compose", "React", "Node.js", "PostgreSQL"],
         icon: Smartphone,
+        images: [
+            { src: humkaamWebImg, alt: "HumKaam web platform" },
+            { src: humkaamAndroidImg, alt: "HumKaam Android app - hire trusted experts", portrait: true }
+        ],
         featured: true,
         badge: "Published on Google Play",
         highlights: [
@@ -50,6 +71,7 @@ const projects: Project[] = [
         description: "Government digital initiative to regulate and monitor the prices of essential commodities across the Chaman region.",
         tech: ["React Native", "Node.js", "MySQL"],
         icon: Landmark,
+        images: [{ src: chamanBazarImg, alt: "Chaman Bazar on the Google Play Store", portrait: true }],
         featured: true,
         client: "Government of Balochistan",
         badge: "Published on Google Play",
@@ -65,6 +87,7 @@ const projects: Project[] = [
         description: "Reservation, hall management, and analytics platform built for Grand Kebabish Banquet.",
         tech: ["Java", "JavaFX", "MySQL"],
         icon: CalendarCheck,
+        images: [{ src: gkbBanquetImg, alt: "GKB Banquet Booking System - new booking screen" }],
         client: "Ziyaan Technologies client work"
     },
     {
@@ -73,6 +96,7 @@ const projects: Project[] = [
         description: "Restaurant order handling, menu management, billing, and reporting in a single desktop system.",
         tech: ["Java", "JavaFX", "MySQL"],
         icon: Utensils,
+        images: [{ src: pakwanImg, alt: "Pakwan Management System" }],
         client: "Ziyaan Technologies client work"
     },
     {
@@ -81,6 +105,7 @@ const projects: Project[] = [
         description: "POS and management system covering dine-in and delivery orders, table management, billing, ledger (khata), and daily sales reports.",
         tech: ["Java", "JavaFX", "MySQL"],
         icon: Coffee,
+        images: [{ src: cafeBaldiaImg, alt: "Cafe Baldia POS system" }],
         client: "Ziyaan Technologies client work"
     },
     {
@@ -90,8 +115,85 @@ const projects: Project[] = [
         tech: ["Java", "JavaFX", "MySQL"],
         icon: Factory,
         client: "Ziyaan Technologies client work"
+    },
+    {
+        title: "Multi-Agent AI Student Assistant",
+        type: "AI / Research",
+        description: "Multi-agent AI system that helps students with study tasks and academic workflows.",
+        tech: ["Python", "LLMs", "Multi-Agent Architecture", "AI Orchestration"],
+        icon: Bot,
+        images: [{ src: studyBuddyImg, alt: "Study Buddy Agent - multi-agent AI student assistant" }],
+        highlights: [
+            "Specialized agents for task decomposition, context management, and structured academic outputs.",
+            "Keeps reasoning, task execution, and user-facing responses in separate layers."
+        ]
+    },
+    {
+        title: "SafeCity AI – Real-Time Security & ANPR Platform",
+        type: "Computer Vision / AI",
+        description: "Python AI service that runs several deep learning models on one real-time streaming platform for city-wide security monitoring and automatic number-plate recognition (ANPR).",
+        tech: ["Python", "YOLOv8", "EasyOCR", "Tesseract", "Flask", "MySQL", "SSE"],
+        icon: TrafficCone,
+        images: [{ src: safeCityImg, alt: "SafeCity AI - license plate recognition with unregistered plate alerts" }],
+        highlights: [
+            "Weapon, fight, and abnormal-activity detection modules run in parallel on YOLOv8 (Ultralytics).",
+            "ANPR pipeline reads plates with EasyOCR + Tesseract, cleans the text, and checks it against a MySQL vehicle database to flag unregistered vehicles.",
+            "Custom multithreaded MJPEG streaming in Flask, with Server-Sent Events for low-latency alerts and live stats dashboards.",
+            "Batch mode for uploaded videos and live stream mode, with security logs stored in MySQL."
+        ]
     }
 ];
+
+const ProjectMedia = ({ proj }: { proj: Project }) => {
+    const Icon = proj.icon;
+    const images = proj.images ?? [];
+    const wide = images.find(img => !img.portrait);
+    const portrait = images.find(img => img.portrait);
+
+    if (images.length === 0) {
+        return <Icon className="w-16 h-16 text-primary opacity-20 group-hover:scale-110 transition-transform duration-500" />;
+    }
+
+    // Wide screenshot with a phone screenshot overlaid in the corner
+    if (wide && portrait) {
+        return (
+            <div className="relative w-full self-stretch min-h-56">
+                <img
+                    src={wide.src}
+                    alt={wide.alt}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover object-left-top rounded-xl border border-white/10 shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"
+                />
+                <img
+                    src={portrait.src}
+                    alt={portrait.alt}
+                    loading="lazy"
+                    className="absolute -bottom-4 -right-2 h-52 w-auto rounded-2xl border-4 border-zinc-900 shadow-2xl group-hover:-translate-y-2 transition-transform duration-500"
+                />
+            </div>
+        );
+    }
+
+    if (portrait) {
+        return (
+            <img
+                src={portrait.src}
+                alt={portrait.alt}
+                loading="lazy"
+                className="h-72 w-auto rounded-2xl border-2 border-primary/30 shadow-2xl shadow-primary/10 object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+            />
+        );
+    }
+
+    return (
+        <img
+            src={wide!.src}
+            alt={wide!.alt}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+        />
+    );
+};
 
 export const Projects = () => {
     return (
@@ -109,7 +211,17 @@ export const Projects = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {projects.map((proj, idx) => {
-                        const Icon = proj.icon;
+                        const hasImages = !!proj.images?.length;
+                        const hasCombo = (proj.images?.length ?? 0) > 1;
+                        const mediaClass = proj.featured
+                            ? hasCombo
+                                ? 'p-8 pb-10 h-80 md:h-auto md:w-[26rem] shrink-0'
+                                : hasImages
+                                    ? 'p-8 h-88 md:h-auto md:w-80 shrink-0'
+                                    : 'p-8 h-48 md:h-auto md:w-72 shrink-0'
+                            : hasImages
+                                ? 'h-56'
+                                : 'p-8 h-56';
                         return (
                             <motion.div
                                 key={idx}
@@ -120,9 +232,9 @@ export const Projects = () => {
                                 transition={{ duration: 0.3 }}
                                 className={`glass-card group overflow-hidden border-white/5 flex flex-col ${proj.featured ? 'md:col-span-2 md:flex-row' : ''}`}
                             >
-                                <div className={`bg-gradient-to-br from-primary/20 to-zinc-800 p-8 flex items-center justify-center relative overflow-hidden ${proj.featured ? 'h-48 md:h-auto md:w-72 shrink-0' : 'h-48'}`}>
-                                    <Icon className="w-16 h-16 text-primary opacity-20 group-hover:scale-110 transition-transform duration-500" />
-                                    <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-white/10 text-primary">
+                                <div className={`bg-gradient-to-br from-primary/20 to-zinc-800 flex items-center justify-center relative overflow-hidden ${mediaClass}`}>
+                                    <ProjectMedia proj={proj} />
+                                    <div className="absolute z-10 top-4 right-4 bg-black/60 backdrop-blur-md text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-white/10 text-primary">
                                         {proj.type}
                                     </div>
                                 </div>

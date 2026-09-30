@@ -1,26 +1,40 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Building2, Calendar, GraduationCap } from 'lucide-react';
 
 const experiences = [
     {
+        title: "Co-Founder & CEO",
+        company: "Ziyaan Technologies",
+        period: "Present",
+        description: [
+            "Co-founded and lead a software company delivering mobile, desktop, and web applications for business and government clients.",
+            "Personally build and ship Java/JavaFX desktop systems and Android applications, in addition to leading the team and client relationships.",
+            "Own the full project lifecycle — requirements gathering, architecture, development, testing, deployment, and client communication.",
+            "Integrate REST APIs and backend systems (Node.js, PHP, MySQL/PostgreSQL) across mobile, desktop, and web products.",
+            "Improve UI/UX and optimize application performance across the product portfolio."
+        ],
+        icon: <Building2 size={20} />
+    },
+    {
         title: "AI Engineering Intern",
         company: "SDSS",
-        period: "Oct 2023 - Present",
+        period: "Oct 2025 - Apr 2026",
         description: [
-            "Exploring and implementing machine learning concepts, model experimentation, and research-oriented tasks.",
-            "Assisting in data handling, preprocessing, and evaluating ML models.",
-            "Collaborating with senior engineers on AI-driven features and prototypes."
+            "Worked on machine learning concepts, model experimentation, and data preprocessing.",
+            "Assisted in evaluating ML models and research-based implementations.",
+            "Collaborated with senior engineers on AI-driven features."
         ],
         icon: <Briefcase size={20} />
     },
     {
-        title: "Supervisor",
-        company: "GKB (Grand Kebabish Banquet)",
+        title: "AI Instructor",
+        company: "NAVTTC",
         period: "Additional Experience",
         description: [
-            "Managing events, staff coordination, and operational planning."
+            "Teach fundamentals of Artificial Intelligence and Machine Learning, including core concepts, practical implementations, and student guidance.",
+            "Conduct sessions on real-world applications, assist students with projects, and simplify complex technical topics."
         ],
-        icon: <Calendar size={20} />
+        icon: <GraduationCap size={20} />
     }
 ];
 

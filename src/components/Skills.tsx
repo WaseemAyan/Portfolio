@@ -1,26 +1,26 @@
 import { motion } from 'framer-motion';
-import { Layout, Smartphone, Sparkles, UserCheck } from 'lucide-react';
+import { Database, Layout, Smartphone, Wrench } from 'lucide-react';
 
 const skillCategories = [
     {
-        title: "Core Development",
-        icon: <Layout className="text-primary" />,
-        skills: ["Java", "JavaFX", "OOP", "Data Structures"]
-    },
-    {
-        title: "Mobile & Web",
+        title: "Mobile, Desktop & Web",
         icon: <Smartphone className="text-primary" />,
-        skills: ["Android (Java/Kotlin)", "HTML", "CSS", "JavaScript", "React"]
+        skills: ["Android (Kotlin, Jetpack Compose, Java)", "React Native", "Java/JavaFX Desktop Apps", "React & Node.js", "REST API Integration", "UI/UX Implementation"]
     },
     {
-        title: "Design & UX",
-        icon: <Sparkles className="text-primary" />,
-        skills: ["UI/UX Principles", "Responsive Design", "Figma Basics"]
+        title: "Languages & Databases",
+        icon: <Database className="text-primary" />,
+        skills: ["Kotlin", "Java", "JavaScript", "PHP (Basic)", "MySQL", "PostgreSQL"]
     },
     {
-        title: "Soft Skills",
-        icon: <UserCheck className="text-primary" />,
-        skills: ["Problem Solving", "Debugging", "Client Coordination", "Communication"]
+        title: "Tools & Concepts",
+        icon: <Wrench className="text-primary" />,
+        skills: ["Android Studio", "Clean Architecture", "Git", "Debugging & Performance Optimization"]
+    },
+    {
+        title: "Core Concepts",
+        icon: <Layout className="text-primary" />,
+        skills: ["Cross-platform Development", "API Integration", "Mobile UI/UX Design", "Clean Code Practices"]
     }
 ];
 
