@@ -17,28 +17,28 @@ export const Contact = () => {
                         </p>
 
                         <div className="space-y-6">
-                            <a href="mailto:muhammadwaseem92123@gmail.com" className="flex items-center gap-6 group p-4 border border-secondary/10 hover:border-primary/20 rounded-2xl bg-surface shadow-[0_12px_30px_-22px_rgba(102,45,128,0.4)] transition-all">
-                                <div className="p-4 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                            <a href="mailto:muhammadwaseem92123@gmail.com" className="flex items-center gap-4 sm:gap-6 group p-4 border border-secondary/10 hover:border-primary/20 rounded-2xl bg-surface shadow-[0_12px_30px_-22px_rgba(102,45,128,0.4)] transition-all">
+                                <div className="shrink-0 p-4 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
                                     <Mail size={24} />
                                 </div>
-                                <div>
+                                <div className="min-w-0">
                                     <p className="text-muted text-xs font-bold uppercase tracking-widest mb-1">Email Me</p>
-                                    <p className="font-bold">muhammadwaseem92123@gmail.com</p>
+                                    <p className="font-bold text-sm sm:text-base break-all">muhammadwaseem92123@gmail.com</p>
                                 </div>
                             </a>
 
-                            <a href="tel:+3172532083" className="flex items-center gap-6 group p-4 border border-secondary/10 hover:border-primary/20 rounded-2xl bg-surface shadow-[0_12px_30px_-22px_rgba(102,45,128,0.4)] transition-all">
-                                <div className="p-4 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                            <a href="tel:+923172532083" className="flex items-center gap-4 sm:gap-6 group p-4 border border-secondary/10 hover:border-primary/20 rounded-2xl bg-surface shadow-[0_12px_30px_-22px_rgba(102,45,128,0.4)] transition-all">
+                                <div className="shrink-0 p-4 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
                                     <Phone size={24} />
                                 </div>
                                 <div>
                                     <p className="text-muted text-xs font-bold uppercase tracking-widest mb-1">Call Me</p>
-                                    <p className="font-bold">(317) 253-2083</p>
+                                    <p className="font-bold">+92-3172532083</p>
                                 </div>
                             </a>
 
-                            <div className="flex items-center gap-6 group p-4 border border-secondary/10 hover:border-secondary/20 rounded-2xl bg-surface shadow-[0_12px_30px_-22px_rgba(102,45,128,0.4)] transition-all opacity-80">
-                                <div className="p-4 bg-surface rounded-xl text-muted">
+                            <div className="flex items-center gap-4 sm:gap-6 group p-4 border border-secondary/10 hover:border-secondary/20 rounded-2xl bg-surface shadow-[0_12px_30px_-22px_rgba(102,45,128,0.4)] transition-all opacity-80">
+                                <div className="shrink-0 p-4 bg-surface rounded-xl text-muted">
                                     <MapPin size={24} />
                                 </div>
                                 <div>

@@ -19,6 +19,18 @@
   --foreground: 15 23 42;
 }
 
+/* Smooth-scroll nav anchors; offset for the fixed navbar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
