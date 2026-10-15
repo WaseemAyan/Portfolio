@@ -1,94 +1,103 @@
-import { motion } from 'framer-motion';
-import { Briefcase, Building2, Calendar, GraduationCap } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Plus } from 'lucide-react';
+import { useState } from 'react';
+import { clsx } from 'clsx';
+import { experiences } from '../data';
 
-const experiences = [
-    {
-        title: "Co-Founder & CEO",
-        company: "Ziyaan Technologies",
-        period: "Present",
-        description: [
-            "Co-founded and lead a software company delivering mobile, desktop, and web applications for business and government clients.",
-            "Personally build and ship Java/JavaFX desktop systems and Android applications, in addition to leading the team and client relationships.",
-            "Own the full project lifecycle — requirements gathering, architecture, development, testing, deployment, and client communication.",
-            "Integrate REST APIs and backend systems (Node.js, PHP, MySQL/PostgreSQL) across mobile, desktop, and web products.",
-            "Improve UI/UX and optimize application performance across the product portfolio."
-        ],
-        icon: <Building2 size={20} />
-    },
-    {
-        title: "AI Engineering Intern",
-        company: "SDSS",
-        period: "Oct 2025 - Apr 2026",
-        description: [
-            "Worked on machine learning concepts, model experimentation, and data preprocessing.",
-            "Assisted in evaluating ML models and research-based implementations.",
-            "Collaborated with senior engineers on AI-driven features."
-        ],
-        icon: <Briefcase size={20} />
-    },
-    {
-        title: "AI Instructor",
-        company: "NAVTTC",
-        period: "Additional Experience",
-        description: [
-            "Teach fundamentals of Artificial Intelligence and Machine Learning, including core concepts, practical implementations, and student guidance.",
-            "Conduct sessions on real-world applications, assist students with projects, and simplify complex technical topics."
-        ],
-        icon: <GraduationCap size={20} />
-    }
-];
+export function Experience() {
+    const [open, setOpen] = useState(0);
 
-export const Experience = () => {
     return (
-        <section id="experience" className="py-24 px-6 relative overflow-hidden">
-            <div className="max-w-6xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+        <section id="experience" className="mb-12 mt-10 px-6 md:mb-36 md:mt-24 md:px-12">
+            <div className="mx-auto max-w-[750px]">
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    transition={{ duration: 0.6 }}
+                    className="mb-12 font-poppins text-[12vw] font-semibold leading-[1.1] md:text-6xl"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Work <span className="text-gradient">Experience</span></h2>
-                    <div className="h-1 w-20 bg-brand mx-auto rounded-full" />
-                </motion.div>
+                    Professional <br />
+                    <span className="chonky chonky-violet">Experience</span>
+                </motion.h2>
 
-                <div className="space-y-8">
-                    {experiences.map((exp, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
-                            className="glass-card p-8 hover:bg-primary/[0.03] transition-colors border-secondary/10"
-                        >
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="p-3 bg-primary/10 rounded-xl text-primary border border-primary/20">
-                                        {exp.icon}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold">{exp.title}</h3>
-                                        <p className="text-muted font-medium">{exp.company}</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2 text-muted text-sm font-medium bg-secondary/[0.05] px-4 py-1.5 rounded-full border border-secondary/10">
-                                    <Calendar size={14} />
-                                    {exp.period}
-                                </div>
-                            </div>
-                            <ul className="space-y-3">
-                                {exp.description.map((item, i) => (
-                                    <li key={i} className="flex gap-3 text-muted items-start">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
-                    ))}
-                </div>
+                <ul className="space-y-3">
+                    {experiences.map((exp, i) => {
+                        const isOpen = open === i;
+                        const Icon = exp.icon;
+                        return (
+                            <motion.li
+                                key={exp.company}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: 0.1 * i }}
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => setOpen(isOpen ? -1 : i)}
+                                    aria-expanded={isOpen}
+                                    aria-controls={`exp-panel-${i}`}
+                                    className={clsx(
+                                        'flex w-full items-center gap-4 rounded-md px-5 py-4 text-left font-poppins text-sm text-white transition-colors md:text-base',
+                                        isOpen ? 'bg-accordion-active' : 'bg-accordion hover:bg-accordion-active/80'
+                                    )}
+                                >
+                                    <span className="flex-1 font-semibold">
+                                        {exp.title} @ {exp.company}
+                                    </span>
+                                    <span className="hidden whitespace-nowrap font-medium sm:block">{exp.period}</span>
+                                    <Plus
+                                        size={18}
+                                        className={clsx('shrink-0 transition-transform duration-300', isOpen && 'rotate-45')}
+                                    />
+                                </button>
+
+                                <AnimatePresence initial={false}>
+                                    {isOpen && (
+                                        <motion.div
+                                            id={`exp-panel-${i}`}
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="mt-2 rounded-md bg-plum p-5 md:p-6">
+                                                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70">
+                                                    <span className="flex items-center gap-2">
+                                                        <Icon size={16} className="text-brand" />
+                                                        {exp.company}
+                                                    </span>
+                                                    <span className="sm:hidden">{exp.period}</span>
+                                                </div>
+                                                <ul className="mb-5 mt-4 space-y-2 font-poppins text-[15px] leading-relaxed text-white">
+                                                    {exp.description.map((d) => (
+                                                        <li key={d} className="flex gap-3">
+                                                            <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand" />
+                                                            {d}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                                <ul className="flex flex-wrap gap-2">
+                                                    {exp.tags.map((t) => (
+                                                        <li
+                                                            key={t}
+                                                            className="rounded-full bg-white/10 px-3 py-1 font-mono text-xs text-white"
+                                                        >
+                                                            {t}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.li>
+                        );
+                    })}
+                </ul>
             </div>
         </section>
     );
-};
+}

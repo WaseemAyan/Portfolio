@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #fcf6f9;
-  --color-surface: #fffbfd;
-  --color-foreground: #0f172a;
-  --color-ink: #0f172a;
-  --color-muted: #64748b;
-  --color-primary: #e11e79;
-  --color-secondary: #662d80;
-  --color-accent: #ff4a24;
-  --color-plum: #170d20;
+  --color-page: #1a191d;
+  --color-page-deep: #0e0e0e;
+  --color-footer: #17161a;
+  --color-brand: #66d9ed;
+  --color-magenta: #df058d;
+  --color-blue: #2c49d8;
+  --color-orange: #ff6b2b;
+  --color-violet: #9440e8;
+  --color-plum: #241d41;
+  --color-accordion: #490c86de;
+  --color-accordion-active: #740cdc;
+  --color-line: #a3a3a3;
 
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-:root {
-  --background: 252 246 249;
-  --foreground: 15 23 42;
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-poppins: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 
 /* Smooth-scroll nav anchors; offset for the fixed navbar */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -32,66 +32,137 @@ html {
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-page);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Helvetica, Arial, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.glass-card {
-  background: var(--color-surface);
-  border: 1px solid rgba(102, 45, 128, 0.1);
-  border-radius: 0.75rem;
-  box-shadow: 0 18px 40px -24px rgba(102, 45, 128, 0.35);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
 }
 
-/* Brand gradient: purple -> magenta -> orange */
-.bg-brand {
-  background-image: linear-gradient(90deg, #662d80, #e11e79 55%, #ff4a24);
+::selection {
+  background: var(--color-violet);
+  color: #fff;
 }
 
-/* Lighter variant for dark plum sections */
-.text-gradient-light {
-  background: linear-gradient(90deg, #d27be6, #ff4f9a 55%, #ff7a45);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Thick marker underline that sits behind the text */
+.chonky {
+  position: relative;
+  z-index: 0;
+  color: #fff;
 }
 
-.text-gradient {
-  background: linear-gradient(90deg, #662d80, #e11e79 55%, #ff4a24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.chonky::after {
+  content: "";
+  position: absolute;
+  bottom: 13.5%;
+  left: -1%;
+  z-index: -1;
+  width: 104%;
+  height: 0.3em;
+  background: var(--chonky-color, var(--color-violet));
+  transition: height 0.1s ease-in-out;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+.chonky-magenta { --chonky-color: var(--color-magenta); }
+.chonky-blue { --chonky-color: var(--color-blue); }
+.chonky-orange { --chonky-color: var(--color-orange); }
+.chonky-violet { --chonky-color: var(--color-violet); }
+
+.chonky-hover:hover::after,
+.group:hover .chonky-hover::after {
+  height: 1em;
 }
 
-::-webkit-scrollbar-track {
-  background: #fcf6f9;
+/* Text wrapped in faint <h3> … </h3> tags, like a code editor */
+.code-editor {
+  position: relative;
+  padding-left: 35px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #d9b8cc;
-  border-radius: 4px;
+.code-editor::before,
+.code-editor::after {
+  display: block;
+  margin-left: -35px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  opacity: 0.3;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #b9799d;
+.code-editor::before {
+  content: "<h3>";
+  margin-bottom: 5px;
 }
+
+.code-editor::after {
+  content: "</h3>";
+  margin-top: 5px;
+}
+
+.code-editor > .code-editor-rule {
+  position: absolute;
+  left: 17px;
+  top: 28px;
+  bottom: 28px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Hide the native pointer while the custom cursor is active */
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+
+/* Hero orb */
+.orb {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    inset 0 0 30px 0 #fff,
+    inset 20px 0 30px #ffd400,
+    inset -20px 0 30px red,
+    inset 20px 0 300px #ff40d6,
+    inset -20px 0 300px #e3ff4b,
+    0 0 50px #fff,
+    -10px 0 100px #fbff00,
+    10px 0 80px #f55;
+  animation: flicker-orb 3s linear 1s 1 both;
+}
+
+@keyframes flicker-orb {
+  0% { opacity: 0.4; }
+  5% { opacity: 0.5; }
+  10% { opacity: 0.6; }
+  15% { opacity: 0.85; }
+  25% { opacity: 0.5; }
+  30% { opacity: 1; }
+  35% { opacity: 0.1; }
+  40% { opacity: 0.25; }
+  45% { opacity: 0.5; }
+  60% { opacity: 1; }
+  70% { opacity: 0.85; }
+  80% { opacity: 0.4; }
+  90% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
 /* Client logo marquee */
 .logo-marquee {
-  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-}
-
-.logo-tile {
-  border: 6px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 14px 34px -10px rgba(225, 30, 121, 0.35);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
 }
 
 .logo-track {
-  animation: logo-scroll 35s linear infinite;
+  animation: logo-scroll 40s linear infinite;
 }
 
 .logo-marquee:hover .logo-track {
@@ -104,8 +175,38 @@ body {
   }
 }
 
+/* Scroll-down mouse */
+.mouse-arrow {
+  animation: mouse-arrow 1.8s ease-in-out infinite;
+}
+
+@keyframes mouse-arrow {
+  0%, 100% { transform: translateY(-8px); }
+  50% { transform: translateY(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .logo-track {
+  .orb,
+  .logo-track,
+  .mouse-arrow {
     animation: none;
   }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
