@@ -10,16 +10,22 @@ import {
     Github,
     Landmark,
     Play,
+    ShoppingCart,
     Smartphone,
+    Store,
     TrafficCone,
-    Utensils
+    Utensils,
+    Zap
 } from 'lucide-react';
 import cafeBaldiaImg from '../assets/projects/cafe-baldia.png';
 import chamanBazarImg from '../assets/projects/chaman-bazar.png';
+import gafforSonsImg from '../assets/projects/gaffor-sons.png';
 import gkbBanquetImg from '../assets/projects/gkb-banquet.png';
 import humkaamAndroidImg from '../assets/projects/humkaam-android.png';
 import humkaamWebImg from '../assets/projects/humkaam-web.png';
+import nkSuperMartImg from '../assets/projects/nk-super-mart.png';
 import pakwanImg from '../assets/projects/pakwan-management.png';
+import quettaMainBoardImg from '../assets/projects/quetta-main-board.png';
 import safeCityImg from '../assets/projects/safecity-anpr.png';
 import studyBuddyImg from '../assets/projects/study-buddy.png';
 
@@ -106,6 +112,33 @@ const projects: Project[] = [
         tech: ["Java", "JavaFX", "MySQL"],
         icon: Coffee,
         images: [{ src: cafeBaldiaImg, alt: "Cafe Baldia POS system" }],
+        client: "Ziyaan Technologies client work"
+    },
+    {
+        title: "NK Super Mart Retail Management System",
+        type: "Retail POS & Inventory · Chaman",
+        description: "Retail POS and inventory platform for a supermarket and its warehouse, covering billing, purchasing, stock transfers, and reports.",
+        tech: ["TypeScript", "NestJS", "Vue 3", "Vuetify", "MySQL"],
+        icon: ShoppingCart,
+        images: [{ src: nkSuperMartImg, alt: "NK Super Mart - stock on hand across warehouse and branch" }],
+        client: "Ziyaan Technologies client work"
+    },
+    {
+        title: "Quetta Main Board",
+        type: "Retail POS & Inventory · Quetta",
+        description: "Retail POS, stock management, sales, and inventory platform for an electrical goods store.",
+        tech: ["TypeScript", "NestJS", "Vue 3", "Vuetify", "MySQL"],
+        icon: Zap,
+        images: [{ src: quettaMainBoardImg, alt: "Quetta Main Board POS - brand and category product picker" }],
+        client: "Ziyaan Technologies client work"
+    },
+    {
+        title: "Gaffor & Sons",
+        type: "Retail POS & Inventory · Quetta",
+        description: "Retail POS, stock management, sales, and inventory platform.",
+        tech: ["TypeScript", "NestJS", "Vue 3", "Vuetify", "MySQL"],
+        icon: Store,
+        images: [{ src: gafforSonsImg, alt: "Gaffor & Sons POS - pick sizes and quantities per product" }],
         client: "Ziyaan Technologies client work"
     },
     {

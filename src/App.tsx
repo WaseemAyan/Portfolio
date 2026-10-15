@@ -3,6 +3,7 @@ import { StarField } from './components/StarField';
 import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
+import { Clients } from './components/Clients';
 import { Skills } from './components/Skills';
 import { Contact } from './components/Contact';
 import { Github, Linkedin, Mail, Download, Layout, Sparkles } from 'lucide-react';
@@ -17,6 +18,7 @@ function App() {
         <h1 className="text-2xl font-black text-gradient">MW.</h1>
         <div className="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest">
           <a href="#about" className="hover:text-primary transition-colors">About</a>
+          <a href="#clients" className="hover:text-primary transition-colors">Clients</a>
           <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
           <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
           <a href="#skills" className="hover:text-primary transition-colors">Skills</a>
@@ -75,6 +77,7 @@ function App() {
       </section>
 
       <About />
+      <Clients />
       <Experience />
       <Projects />
       <Skills />

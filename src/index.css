@@ -52,3 +52,36 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #404040;
 }
+/* Client logo marquee */
+.font-outfit {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+}
+
+.logo-marquee {
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+
+.logo-tile {
+  border: 6px solid #d5dbee;
+  box-shadow: 0 14px 30px -8px rgba(15, 23, 60, 0.28);
+}
+
+.logo-track {
+  animation: logo-scroll 35s linear infinite;
+}
+
+.logo-marquee:hover .logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes logo-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    animation: none;
+  }
+}
