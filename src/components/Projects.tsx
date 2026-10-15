@@ -195,13 +195,13 @@ const ProjectMedia = ({ proj }: { proj: Project }) => {
                     src={wide.src}
                     alt={wide.alt}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover object-left-top rounded-xl border border-white/10 shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover object-left-top rounded-lg border border-secondary/10 shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 <img
                     src={portrait.src}
                     alt={portrait.alt}
                     loading="lazy"
-                    className="absolute -bottom-4 -right-2 h-52 w-auto rounded-2xl border-4 border-zinc-900 shadow-2xl group-hover:-translate-y-2 transition-transform duration-500"
+                    className="absolute -bottom-4 -right-2 h-52 w-auto rounded-2xl border-4 border-ink shadow-2xl group-hover:-translate-y-2 transition-transform duration-500"
                 />
             </div>
         );
@@ -230,7 +230,7 @@ const ProjectMedia = ({ proj }: { proj: Project }) => {
 
 export const Projects = () => {
     return (
-        <section id="projects" className="py-24 px-6 relative bg-zinc-900/30">
+        <section id="projects" className="py-24 px-6 relative bg-secondary/[0.03]">
             <div className="max-w-6xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -239,7 +239,7 @@ export const Projects = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured <span className="text-gradient">Projects</span></h2>
-                    <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
+                    <div className="h-1 w-20 bg-brand mx-auto rounded-full" />
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -263,11 +263,12 @@ export const Projects = () => {
                                 viewport={{ once: true }}
                                 whileHover={{ y: -10 }}
                                 transition={{ duration: 0.3 }}
-                                className={`glass-card group overflow-hidden border-white/5 flex flex-col ${proj.featured ? 'md:col-span-2 md:flex-row' : ''}`}
+                                className={`glass-card relative group overflow-hidden border-secondary/10 flex flex-col ${proj.featured ? 'md:col-span-2 md:flex-row' : ''}`}
                             >
-                                <div className={`bg-gradient-to-br from-primary/20 to-zinc-800 flex items-center justify-center relative overflow-hidden ${mediaClass}`}>
+                                <div aria-hidden className="absolute top-0 inset-x-0 h-[3px] bg-brand z-20" />
+                                <div className={`bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/10 flex items-center justify-center relative overflow-hidden ${mediaClass}`}>
                                     <ProjectMedia proj={proj} />
-                                    <div className="absolute z-10 top-4 right-4 bg-black/60 backdrop-blur-md text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-white/10 text-primary">
+                                    <div className="absolute z-10 top-4 right-4 bg-plum/85 backdrop-blur-md text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-md text-white">
                                         {proj.type}
                                     </div>
                                 </div>
@@ -281,19 +282,19 @@ export const Projects = () => {
                                                 </span>
                                             )}
                                             {proj.client && (
-                                                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 flex items-center gap-1.5">
+                                                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-secondary/[0.05] border border-secondary/10 text-secondary flex items-center gap-1.5">
                                                     <Building2 size={11} /> {proj.client}
                                                 </span>
                                             )}
                                         </div>
                                     )}
-                                    <p className="text-zinc-400 mb-6">
+                                    <p className="text-muted mb-6">
                                         {proj.description}
                                     </p>
                                     {proj.highlights && (
                                         <ul className="space-y-3 mb-6">
                                             {proj.highlights.map((item, i) => (
-                                                <li key={i} className="flex gap-3 text-zinc-400 items-start text-sm">
+                                                <li key={i} className="flex gap-3 text-muted items-start text-sm">
                                                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                                                     {item}
                                                 </li>
@@ -302,7 +303,7 @@ export const Projects = () => {
                                     )}
                                     <div className="flex flex-wrap gap-2 mb-8">
                                         {proj.tech.map((t, i) => (
-                                            <span key={i} className="text-xs font-mono bg-white/5 border border-white/10 px-2 py-1 rounded">
+                                            <span key={i} className="text-xs font-mono bg-secondary/[0.05] border border-secondary/10 px-2 py-1 rounded">
                                                 {t}
                                             </span>
                                         ))}
@@ -310,17 +311,17 @@ export const Projects = () => {
                                     {(proj.link || proj.playStore || proj.github) && (
                                         <div className="mt-auto flex flex-wrap items-center gap-5">
                                             {proj.link && (
-                                                <a href={proj.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-primary transition-colors">
+                                                <a href={proj.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-ink hover:text-primary transition-colors">
                                                     Visit Website <ExternalLink size={14} />
                                                 </a>
                                             )}
                                             {proj.playStore && (
-                                                <a href={proj.playStore} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-primary transition-colors">
+                                                <a href={proj.playStore} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-ink hover:text-primary transition-colors">
                                                     <Play size={14} className="fill-current" /> Google Play
                                                 </a>
                                             )}
                                             {proj.github && (
-                                                <a href={proj.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+                                                <a href={proj.github} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ink transition-colors">
                                                     <Github size={18} />
                                                 </a>
                                             )}

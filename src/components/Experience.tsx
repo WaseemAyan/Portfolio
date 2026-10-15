@@ -49,7 +49,7 @@ export const Experience = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Work <span className="text-gradient">Experience</span></h2>
-                    <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
+                    <div className="h-1 w-20 bg-brand mx-auto rounded-full" />
                 </motion.div>
 
                 <div className="space-y-8">
@@ -60,7 +60,7 @@ export const Experience = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="glass-card p-8 hover:bg-white/5 transition-colors border-white/5"
+                            className="glass-card p-8 hover:bg-primary/[0.03] transition-colors border-secondary/10"
                         >
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                                 <div className="flex items-center gap-4">
@@ -69,17 +69,17 @@ export const Experience = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-2xl font-bold">{exp.title}</h3>
-                                        <p className="text-zinc-400 font-medium">{exp.company}</p>
+                                        <p className="text-muted font-medium">{exp.company}</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2 text-zinc-500 text-sm font-medium bg-white/5 px-4 py-1.5 rounded-full border border-white/5">
+                                <div className="flex items-center gap-2 text-muted text-sm font-medium bg-secondary/[0.05] px-4 py-1.5 rounded-full border border-secondary/10">
                                     <Calendar size={14} />
                                     {exp.period}
                                 </div>
                             </div>
                             <ul className="space-y-3">
                                 {exp.description.map((item, i) => (
-                                    <li key={i} className="flex gap-3 text-zinc-400 items-start">
+                                    <li key={i} className="flex gap-3 text-muted items-start">
                                         <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                                         {item}
                                     </li>

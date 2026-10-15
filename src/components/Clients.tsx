@@ -47,22 +47,24 @@ const LogoGroup = ({ hidden }: { hidden?: boolean }) => (
 
 export const Clients = () => {
     return (
-        <section id="clients" className="py-20 relative bg-[#e4e8f2]" aria-labelledby="clients-heading">
-            <div className="max-w-6xl mx-auto px-6">
+        <section id="clients" className="py-20 relative overflow-hidden bg-plum" aria-labelledby="clients-heading">
+            <div aria-hidden className="pointer-events-none absolute -top-40 right-0 w-[30rem] h-[30rem] rounded-full bg-primary/20 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 w-[26rem] h-[26rem] rounded-full bg-secondary/30 blur-3xl" />
+            <div className="relative max-w-6xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center mb-10"
                 >
-                    <p className="text-sm font-extrabold tracking-[0.25em] uppercase text-[#2443d6] mb-5">Trusted by</p>
-                    <h2 id="clients-heading" className="font-outfit text-4xl md:text-5xl font-extrabold tracking-tight text-[#0b1027]">
-                        The Clients I Have Provided Software Solutions
+                    <p className="flex items-center justify-center gap-3 text-xs font-extrabold tracking-[0.25em] uppercase text-[#ff6fae] mb-5"><span className="h-px w-10 bg-[#ff6fae]" />Trusted by<span className="h-px w-10 bg-[#ff6fae]" /></p>
+                    <h2 id="clients-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+                        The Clients Provided with <span className="text-gradient-light">Software Solutions</span>
                     </h2>
                 </motion.div>
             </div>
 
-            <div className="logo-marquee overflow-hidden">
+            <div className="logo-marquee relative overflow-hidden">
                 <div className="logo-track flex w-max">
                     <LogoGroup />
                     {/* Duplicate set so the loop is seamless */}

@@ -1,36 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0a0a0a;
-  --color-foreground: #ffffff;
-  --color-primary: #3b82f6;
-  --color-secondary: #1d4ed8;
-  --color-accent: #60a5fa;
+  --color-background: #fcf6f9;
+  --color-surface: #fffbfd;
+  --color-foreground: #0f172a;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-primary: #e11e79;
+  --color-secondary: #662d80;
+  --color-accent: #ff4a24;
+  --color-plum: #170d20;
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 :root {
-  --background: 10 10 10;
-  --foreground: 255 255 255;
+  --background: 252 246 249;
+  --foreground: 15 23 42;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(102, 45, 128, 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 18px 40px -24px rgba(102, 45, 128, 0.35);
+}
+
+/* Brand gradient: purple -> magenta -> orange */
+.bg-brand {
+  background-image: linear-gradient(90deg, #662d80, #e11e79 55%, #ff4a24);
+}
+
+/* Lighter variant for dark plum sections */
+.text-gradient-light {
+  background: linear-gradient(90deg, #d27be6, #ff4f9a 55%, #ff7a45);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #60a5fa, #3b82f6);
+  background: linear-gradient(90deg, #662d80, #e11e79 55%, #ff4a24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -41,29 +57,25 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #fcf6f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262626;
+  background: #d9b8cc;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+  background: #b9799d;
 }
 /* Client logo marquee */
-.font-outfit {
-  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
-}
-
 .logo-marquee {
   mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
 }
 
 .logo-tile {
-  border: 6px solid #d5dbee;
-  box-shadow: 0 14px 30px -8px rgba(15, 23, 60, 0.28);
+  border: 6px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 34px -10px rgba(225, 30, 121, 0.35);
 }
 
 .logo-track {
