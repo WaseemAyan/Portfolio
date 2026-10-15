@@ -7,8 +7,11 @@ import type { Project, ProjectCategory } from '../data';
 import { ProjectModal } from './ProjectModal';
 
 const categories: ProjectCategory[] = ['Mobile', 'Desktop', 'Web', 'AI'];
-// Featured card needs a wide screenshot, so pin it rather than taking the first project
-const featured = projects.find((p) => p.title === 'HumKaam') ?? projects[0];
+// Shown in the 3D phone, so it needs a portrait screenshot
+const featured = projects.find((p) => p.title === 'Chaman Bazar') ?? projects[0];
+
+// Thickness of the 3D phone body in px (one slice per px)
+const PHONE_DEPTH = 14;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -45,32 +48,7 @@ export function Work() {
                         </p>
                     </motion.div>
 
-                    <motion.button
-                        type="button"
-                        onClick={() => setSelected(featured)}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.15 }}
-                        className="group relative block overflow-hidden rounded-md text-left md:mt-24"
-                    >
-                        {featured.images?.[0] && (
-                            <img
-                                src={featured.images[0].src}
-                                alt={featured.images[0].alt}
-                                className="aspect-[16/10] w-full object-cover object-left-top opacity-60 transition duration-500 group-hover:scale-105 group-hover:opacity-80"
-                                loading="lazy"
-                            />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-page via-page/60 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                            <h4 className="font-poppins text-[22px] font-medium">Featured Project</h4>
-                            <h3 className="mt-1 font-mono text-3xl font-semibold">{featured.title}</h3>
-                            <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-page transition group-hover:bg-brand">
-                                View Project <ArrowRight size={16} className="transition group-hover:translate-x-1" />
-                            </span>
-                        </div>
-                    </motion.button>
+                    <FeaturedProject project={featured} onOpen={() => setSelected(featured)} />
                 </div>
 
                 {/* Filter */}
@@ -116,6 +94,114 @@ export function Work() {
 
             <ProjectModal project={selected} onClose={closeModal} />
         </section>
+    );
+}
+
+function FeaturedProject({ project, onOpen }: { project: Project; onOpen: () => void }) {
+    const screen = project.images?.find((img) => img.portrait) ?? project.images?.[0];
+
+    return (
+        <div className="relative flex flex-col items-center md:block md:h-[640px]">
+            {/* 3D phone that slowly turns through a few poses */}
+            <motion.div
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="py-6 md:absolute md:right-10 md:top-0 lg:right-20"
+            >
+                {/* Float + perspective live on a wrapper; framer's inline transform would replace the CSS spin */}
+                <motion.div
+                    animate={{ y: [0, -14, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                    className="phone-shadow [perspective:900px]"
+                >
+                    <button
+                        type="button"
+                        onClick={onOpen}
+                        aria-label={`View ${project.title}`}
+                        className="phone-3d relative block aspect-[9/19] w-[200px] lg:w-[230px]"
+                    >
+                        {/* Twist (tilt) lives on the button, the spin on this inner layer */}
+                        <span className="phone-spin absolute inset-0 block">
+                            {/* Stacked slices give the body real thickness, so the rounded edge shows when it turns */}
+                            {Array.from({ length: PHONE_DEPTH }, (_, k) => (
+                                <span
+                                    key={k}
+                                    aria-hidden
+                                    className="absolute inset-0 rounded-[38px]"
+                                    style={{
+                                        transform: `translateZ(${-k}px)`,
+                                        background: k === PHONE_DEPTH - 1 ? '#0d0d10' : `hsl(240 4% ${30 - k}%)`
+                                    }}
+                                />
+                            ))}
+                            {/* Back panel with camera bump, facing the other way so it shows mid-spin */}
+                            <span
+                                aria-hidden
+                                className="absolute inset-0 rounded-[38px] bg-[linear-gradient(160deg,#2a2a30,#0d0d10_60%)]"
+                                style={{ transform: `translateZ(${-PHONE_DEPTH}px) rotateY(180deg)` }}
+                            >
+                                <span className="absolute left-4 top-4 grid size-[68px] grid-cols-2 place-items-center gap-1 rounded-[20px] bg-[#1c1c21] p-2 ring-1 ring-white/10">
+                                    <span className="size-6 rounded-full bg-[#050507] ring-2 ring-[#2c2c33]" />
+                                    <span className="size-2 rounded-full bg-[#3a3a40]" />
+                                    <span className="size-6 rounded-full bg-[#050507] ring-2 ring-[#2c2c33]" />
+                                    <span className="size-6 rounded-full bg-[#050507] ring-2 ring-[#2c2c33]" />
+                                </span>
+                            </span>
+                            {/* Front glass */}
+                            <span className="absolute inset-0 rounded-[38px] bg-[#0b0b0d] p-2 [transform:translateZ(1px)]">
+                                <span aria-hidden className="absolute left-1/2 top-2 z-10 h-[18px] w-[38%] -translate-x-1/2 rounded-b-2xl bg-[#0b0b0d]" />
+                                <span className="relative block size-full overflow-hidden rounded-[31px] bg-white">
+                                    {screen && (
+                                        <img
+                                            src={screen.src}
+                                            alt={screen.alt}
+                                            className="size-full object-cover object-top"
+                                            loading="lazy"
+                                        />
+                                    )}
+                                    <span aria-hidden className="phone-glare absolute inset-0" />
+                                </span>
+                            </span>
+                        </span>
+                    </button>
+                </motion.div>
+            </motion.div>
+
+            {/* Hand-drawn arrow pointing at the phone */}
+            <svg
+                aria-hidden
+                viewBox="0 0 220 220"
+                className="absolute left-[14%] top-[300px] hidden w-[170px] text-violet md:block lg:left-[18%]"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            >
+                <path d="M20 205 C 15 120, 80 50, 190 30" strokeWidth="5" />
+                <path d="M27 200 C 28 125, 90 62, 186 40" strokeWidth="2" opacity="0.6" />
+                <path d="M150 8 L 196 28 L 165 64" strokeWidth="5" />
+            </svg>
+
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mt-14 self-start md:absolute md:bottom-0 md:left-0 md:mt-0"
+            >
+                <h4 className="font-poppins text-[22px] font-medium">Featured Project</h4>
+                <h3 className="mt-2 font-mono text-3xl font-semibold">{project.title}</h3>
+                <button
+                    type="button"
+                    onClick={onOpen}
+                    className="group mt-6 inline-flex items-center gap-2 rounded bg-violet px-6 py-3 text-sm font-semibold text-white transition hover:bg-accordion-active"
+                >
+                    View Project <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+                </button>
+            </motion.div>
+        </div>
     );
 }
 

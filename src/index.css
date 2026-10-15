@@ -40,11 +40,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.01em;
+/* In the base layer so font/colour utilities on headings can override it */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
 }
 
 ::selection {
@@ -154,6 +157,70 @@ h1, h2, h3, h4, h5, h6 {
   80% { opacity: 0.4; }
   90% { opacity: 0.5; }
   100% { opacity: 1; }
+}
+
+/* Featured project phone: turns between an edge-on view and two front angles, like a product video */
+/*
+ * The phone's motion is split in two so it only ever stops once:
+ * - .phone-spin turns it a full 360deg about its long axis, always the same way,
+ *   easing into the front-facing pose, holding there, then easing off again.
+ * - .phone-3d keeps changing the tilt in a smooth loop, which is the "twist".
+ * Nesting composes them as rotateX rotateZ (outer) then rotateY (inner), so the
+ * spin happens about the phone's own axis before the tilt is applied.
+ */
+.phone-3d,
+.phone-spin {
+  transform-style: preserve-3d;
+}
+
+.phone-3d {
+  animation: phone-twist 16s ease-in-out infinite;
+}
+
+.phone-spin {
+  animation: phone-spin 16s infinite;
+}
+
+/* Shadow sits on the wrapper: a filter on the 3D element itself would flatten it */
+.phone-shadow {
+  filter: drop-shadow(30px 40px 40px rgba(0, 0, 0, 0.55));
+}
+
+@keyframes phone-spin {
+  0%, 18% {
+    transform: rotateY(-20deg);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
+  }
+  100% {
+    transform: rotateY(340deg);
+  }
+}
+
+/* Front pose matches the hold above; the in-between tilts keep it twisting while it turns */
+@keyframes phone-twist {
+  0%, 18%, 100% { transform: rotateX(-22deg) rotateZ(-30deg); }
+  45% { transform: rotateX(-4deg) rotateZ(-18deg); }
+  70% { transform: rotateX(10deg) rotateZ(-12deg); }
+  88% { transform: rotateX(-10deg) rotateZ(-26deg); }
+}
+
+.phone-glare {
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.18) 0%, transparent 35%, transparent 70%, rgba(255, 255, 255, 0.06) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-3d,
+  .phone-spin {
+    animation: none;
+  }
+
+  .phone-3d {
+    transform: rotateX(-22deg) rotateZ(-30deg);
+  }
+
+  .phone-spin {
+    transform: rotateY(-20deg);
+  }
 }
 
 /* Client logo marquee */
