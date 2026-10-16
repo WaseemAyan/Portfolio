@@ -26,9 +26,17 @@ import nkMartLogo from './assets/clients/nk-mart.png';
 import qmbLogo from './assets/clients/qmb.png';
 import cafeBaldiaImg from './assets/projects/cafe-baldia.png';
 import chamanBazarImg from './assets/projects/chaman-bazar.png';
+import chamanBazarComplaintEnImg from './assets/projects/chaman-bazar-complaint-en.webp';
+import chamanBazarComplaintUrImg from './assets/projects/chaman-bazar-complaint-ur.webp';
+import chamanBazarFruitsImg from './assets/projects/chaman-bazar-fruits.webp';
+import chamanBazarHomeImg from './assets/projects/chaman-bazar-home.webp';
 import gafforSonsImg from './assets/projects/gaffor-sons.png';
 import gkbBanquetImg from './assets/projects/gkb-banquet.png';
 import humkaamAndroidImg from './assets/projects/humkaam-android.png';
+import humkaamHomeImg from './assets/projects/humkaam-home.webp';
+import humkaamPlayStoreImg from './assets/projects/humkaam-play-store.webp';
+import humkaamProfileImg from './assets/projects/humkaam-profile.webp';
+import humkaamStepsImg from './assets/projects/humkaam-steps.webp';
 import humkaamWebImg from './assets/projects/humkaam-web.png';
 import nkSuperMartImg from './assets/projects/nk-super-mart.png';
 import pakwanImg from './assets/projects/pakwan-management.png';
@@ -40,6 +48,8 @@ export type ProjectImage = {
     src: string;
     alt: string;
     portrait?: boolean;
+    // Image used on the grid tile; otherwise the first wide screenshot is used
+    cover?: boolean;
 };
 
 export type ProjectCategory = 'Mobile' | 'Desktop' | 'Web' | 'AI';
@@ -68,26 +78,6 @@ export type Project = {
 
 export const projects: Project[] = [
     {
-        title: "Chaman Bazar",
-        type: "Government Mobile App",
-        category: "Mobile",
-        description: "Government digital initiative to regulate and monitor the prices of essential commodities across the Chaman region.",
-        tech: ["React Native", "Node.js", "MySQL"],
-        icon: Landmark,
-        images: [{ src: chamanBazarImg, alt: "Chaman Bazar on the Google Play Store", portrait: true }],
-        featured: true,
-        color: "#1b7f3b",
-        logo: govtBalochistanLogo,
-        logoPad: '10px',
-        client: "Government of Balochistan",
-        badge: "Published on Google Play",
-        highlights: [
-            "Complaint submission portal for overpricing violations, supporting consumer protection and market transparency.",
-            "Cross-platform front end with a Node.js/MySQL backend handling real-time data flow for public use at scale."
-        ],
-        playStore: "https://play.google.com/store/apps/details?id=com.chamanbazar"
-    },
-    {
         title: "HumKaam",
         type: "Android + Web Platform",
         category: "Mobile",
@@ -95,8 +85,12 @@ export const projects: Project[] = [
         tech: ["Kotlin", "Jetpack Compose", "React", "Node.js", "PostgreSQL"],
         icon: Smartphone,
         images: [
-            { src: humkaamWebImg, alt: "HumKaam web platform" },
-            { src: humkaamAndroidImg, alt: "HumKaam Android app - hire trusted experts", portrait: true }
+            { src: humkaamPlayStoreImg, alt: "HumKaam on the Google Play Store, by Ziyaan Technologies" },
+            { src: humkaamWebImg, alt: "HumKaam web platform", cover: true },
+            { src: humkaamAndroidImg, alt: "HumKaam Android app - hire trusted experts", portrait: true },
+            { src: humkaamHomeImg, alt: "HumKaam Android home screen with service categories", portrait: true },
+            { src: humkaamStepsImg, alt: "HumKaam featured professionals and three-step hiring flow", portrait: true },
+            { src: humkaamProfileImg, alt: "HumKaam professional profile with weekly availability", portrait: true }
         ],
         featured: true,
         color: "#0a74db",
@@ -122,6 +116,34 @@ export const projects: Project[] = [
         logo: nkMartLogo,
         logoPad: '14px',
         client: "Ziyaan Technologies client work"
+    },
+    {
+        title: "Chaman Bazar",
+        type: "Government Mobile App",
+        category: "Mobile",
+        description: "Government digital initiative to regulate and monitor the prices of essential commodities across the Chaman region.",
+        tech: ["React Native", "Node.js", "MySQL"],
+        icon: Landmark,
+        // Play Store shot stays first: it fills the 3D phone and grid tile, while the
+        // framed app screens below already include their own device bezel
+        images: [
+            { src: chamanBazarImg, alt: "Chaman Bazar on the Google Play Store", portrait: true },
+            { src: chamanBazarHomeImg, alt: "Chaman Bazar home screen with today's price highlights", portrait: true },
+            { src: chamanBazarFruitsImg, alt: "Chaman Bazar fruit prices per kg", portrait: true },
+            { src: chamanBazarComplaintEnImg, alt: "Submit an overpricing complaint in English", portrait: true },
+            { src: chamanBazarComplaintUrImg, alt: "Submit an overpricing complaint in Urdu", portrait: true }
+        ],
+        featured: true,
+        color: "#1b7f3b",
+        logo: govtBalochistanLogo,
+        logoPad: '10px',
+        client: "Government of Balochistan",
+        badge: "Published on Google Play",
+        highlights: [
+            "Complaint submission portal for overpricing violations, supporting consumer protection and market transparency.",
+            "Cross-platform front end with a Node.js/MySQL backend handling real-time data flow for public use at scale."
+        ],
+        playStore: "https://play.google.com/store/apps/details?id=com.chamanbazar"
     },
     {
         title: "GKB Banquet Booking System",

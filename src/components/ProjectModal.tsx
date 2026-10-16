@@ -53,16 +53,25 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
                             </button>
 
                             {project.images && project.images.length > 0 && (
-                                <div className={clsx('flex gap-4 bg-[#121114] p-4', project.images.length > 1 && 'overflow-x-auto')}>
+                                <div
+                                    className={clsx(
+                                        'flex items-center gap-4 bg-[#121114] p-4',
+                                        project.images.length > 1 && 'snap-x snap-mandatory overflow-x-auto'
+                                    )}
+                                >
                                     {project.images.map((img) => (
                                         <img
                                             key={img.src}
                                             src={img.src}
                                             alt={img.alt}
                                             className={clsx(
-                                                'max-h-[60vh] rounded object-contain',
-                                                img.portrait ? 'w-auto shrink-0' : 'min-w-0 flex-1',
-                                                project.images!.length === 1 && 'mx-auto'
+                                                'shrink-0 snap-start rounded object-contain',
+                                                project.images!.length === 1
+                                                    ? 'mx-auto max-h-[60vh]'
+                                                    : img.portrait
+                                                      ? 'h-[min(46vh,520px)] w-auto md:h-[min(60vh,520px)]'
+                                                      : // Wide shots take the full strip width, one per swipe
+                                                        'max-h-[min(60vh,520px)] w-full'
                                             )}
                                         />
                                     ))}

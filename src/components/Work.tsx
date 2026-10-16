@@ -206,22 +206,36 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: () => 
 }
 
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
-    const image = project.images?.find((img) => !img.portrait) ?? project.images?.[0];
+    const image =
+        project.images?.find((img) => img.cover) ??
+        project.images?.find((img) => !img.portrait) ??
+        project.images?.[0];
     const Icon = project.icon;
 
     return (
         <button type="button" onClick={onOpen} className="group block w-full text-left">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[#232227]">
+            <div
+                className="relative aspect-[16/10] overflow-hidden rounded-md bg-[#232227]"
+                style={image?.portrait ? { background: `linear-gradient(160deg, ${project.color ?? '#241d41'}, #121114)` } : undefined}
+            >
                 {image ? (
-                    <img
-                        src={image.src}
-                        alt={image.alt}
-                        className={clsx(
-                            'size-full transition duration-500 group-hover:scale-105',
-                            image.portrait ? 'object-contain py-4' : 'object-cover object-top'
-                        )}
-                        loading="lazy"
-                    />
+                    image.portrait ? (
+                        // Phone screenshot rises from the bottom of the tile, cropped like a device peeking in
+                        <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="absolute left-1/2 top-[12%] w-[38%] -translate-x-1/2 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/10 transition duration-500 group-hover:-translate-y-2 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                    ) : (
+                        // Anchor wide screenshots top-left so the app's logo and nav stay in view
+                        <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="size-full object-cover object-left-top transition duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                    )
                 ) : (
                     <div className="grid size-full place-items-center bg-gradient-to-br from-plum to-[#121114]">
                         <Icon size={64} strokeWidth={1.2} className="text-white/40" />
