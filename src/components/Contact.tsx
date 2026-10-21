@@ -10,7 +10,7 @@ const socials = [
 
 export function Contact() {
     return (
-        <section id="contact" className="bg-page-deep px-5 py-24 md:py-32">
+        <section id="contact" className="bg-page-deep px-6 py-20 md:py-32">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -29,20 +29,20 @@ export function Contact() {
 
                 <a
                     href={`mailto:${contact.email}`}
-                    className="group mt-10 inline-flex max-w-full items-center gap-3 font-mono text-lg text-white md:text-2xl"
+                    className="group mt-10 inline-flex max-w-full items-center gap-3 py-2 font-mono text-[min(4vw,1.125rem)] text-white md:text-2xl"
                 >
                     <Mail size={22} className="shrink-0 text-brand" />
                     <span className="chonky chonky-blue chonky-hover truncate">{contact.email}</span>
                 </a>
 
-                <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-4 font-mono">
+                <ul className="mt-8 grid grid-cols-2 gap-3 font-mono sm:flex sm:flex-wrap sm:gap-x-8 sm:gap-y-4">
                     {socials.map(({ label, href, icon: Icon }) => (
                         <li key={label}>
                             <a
                                 href={href}
                                 target={href.startsWith('http') ? '_blank' : undefined}
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-2 text-white/80 transition-colors hover:text-brand"
+                                className="flex items-center gap-2 rounded-lg border border-white/10 px-4 py-3 text-white/80 transition-colors hover:border-brand hover:text-brand sm:inline-flex sm:border-0 sm:p-0"
                             >
                                 <Icon size={18} />
                                 {label}
@@ -53,7 +53,7 @@ export function Contact() {
                         <a
                             href={`${import.meta.env.BASE_URL}Muhammad-Waseem-CV.pdf`}
                             download
-                            className="inline-flex items-center gap-2 text-white/80 transition-colors hover:text-brand"
+                            className="flex items-center gap-2 rounded-lg border border-white/10 px-4 py-3 text-white/80 transition-colors hover:border-brand hover:text-brand sm:inline-flex sm:border-0 sm:p-0"
                         >
                             <Download size={18} />
                             Resume

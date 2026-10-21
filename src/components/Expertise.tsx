@@ -64,7 +64,7 @@ export function Expertise() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.15 * i }}
                                 className={clsx(
-                                    'border-2 border-line px-[30px] py-10 md:border-y-[3px]',
+                                    'border-2 border-line px-5 py-8 sm:px-[30px] sm:py-10 md:border-y-[3px]',
                                     // Inner edges are half width so neighbours add up to one 3px rule
                                     i === 0 && 'md:border-l-[3px] md:border-r-[1.5px]',
                                     i === 1 && 'md:border-x-[1.5px]',
@@ -72,9 +72,9 @@ export function Expertise() {
                                     i > 0 && '-mt-0.5 md:mt-0'
                                 )}
                             >
-                                <div className="mb-[13px] flex items-start gap-5">
-                                    <Icon size={40} strokeWidth={1.5} className="mt-1 shrink-0 text-white" />
-                                    <h3 className="font-poppins text-[26px] font-semibold leading-[1.2]">
+                                <div className="mb-[13px] flex items-start gap-4 sm:gap-5">
+                                    <Icon strokeWidth={1.5} className="mt-1 size-8 shrink-0 text-white sm:size-10" />
+                                    <h3 className="font-poppins text-[23px] font-semibold leading-[1.2] sm:text-[26px]">
                                         <span className={clsx('chonky', chonkyClass[item.accent])}>{item.title}</span>
                                         <br />
                                         {item.subtitle}
@@ -96,7 +96,7 @@ export function Expertise() {
                     whileInView={{ opacity: 0.45 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1 }}
-                    className="mx-auto mt-10 max-w-[640px] overflow-hidden whitespace-pre px-2 font-mono text-[8px] leading-[2.2] tracking-[0.05em] text-[#e6e6e6] [mask-image:linear-gradient(to_right,#000_80%,transparent)] sm:text-[11px] md:text-xs"
+                    className="mx-auto mt-10 hidden max-w-[640px] overflow-hidden whitespace-pre px-2 font-mono text-[11px] leading-[2.2] tracking-[0.05em] text-[#e6e6e6] [mask-image:linear-gradient(to_right,#000_80%,transparent)] sm:block md:text-xs"
                 >
                     {codeLines.map(([indent, tokens], i) => (
                         <div key={i} className="flex">

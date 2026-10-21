@@ -55,7 +55,7 @@ export function Navbar() {
                 <a
                     href="#home"
                     className={clsx(
-                        'font-mono text-xl font-semibold tracking-tight text-white transition-opacity',
+                        'py-2 font-mono text-xl font-semibold tracking-tight text-white transition-opacity',
                         scrolled && 'md:pointer-events-none md:opacity-0'
                     )}
                 >

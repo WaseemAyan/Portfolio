@@ -27,7 +27,7 @@ export function Work() {
     ];
 
     return (
-        <section id="work" className="px-6 pb-8 pt-2 md:px-12">
+        <section id="work" className="overflow-x-clip px-6 pb-8 pt-2 md:px-12">
             <div className="mx-auto max-w-[1240px]">
                 {/* Intro + featured project */}
                 <div className="grid items-start gap-12 md:grid-cols-2">
@@ -52,17 +52,17 @@ export function Work() {
                 </div>
 
                 {/* Filter */}
-                <div className="mt-24 flex flex-wrap items-baseline gap-x-6 gap-y-3 font-mono text-sm">
-                    <span className="text-white/40">Filter by</span>
+                <div className="-mx-6 mt-16 flex items-baseline gap-2 overflow-x-auto px-6 font-mono text-sm [scrollbar-width:none] md:mx-0 md:mt-24 md:flex-wrap md:gap-x-6 md:gap-y-3 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
+                    <span className="hidden text-white/40 md:inline">Filter by</span>
                     {filters.map(({ label, count }, i) => (
-                        <span key={label} className="flex items-baseline gap-6">
-                            {i > 0 && <span className="text-white/20">/</span>}
+                        <span key={label} className="flex shrink-0 items-baseline gap-6">
+                            {i > 0 && <span className="hidden text-white/20 md:inline">/</span>}
                             <button
                                 type="button"
                                 onClick={() => setFilter(label)}
                                 className={clsx(
-                                    'transition-colors hover:text-brand',
-                                    filter === label ? 'text-brand' : 'text-white'
+                                    'whitespace-nowrap rounded-full border px-4 py-2.5 transition-colors hover:text-brand md:rounded-none md:border-0 md:p-0',
+                                    filter === label ? 'border-brand bg-brand/10 text-brand md:bg-transparent' : 'border-white/15 text-white'
                                 )}
                                 aria-pressed={filter === label}
                             >
@@ -120,7 +120,7 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: () => 
                         type="button"
                         onClick={onOpen}
                         aria-label={`View ${project.title}`}
-                        className="phone-3d relative block aspect-[9/19] w-[200px] lg:w-[230px]"
+                        className="phone-3d relative block aspect-[9/19] w-[170px] sm:w-[200px] lg:w-[230px]"
                     >
                         {/* Twist (tilt) lives on the button, the spin on this inner layer */}
                         <span className="phone-spin absolute inset-0 block">
@@ -189,7 +189,7 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: () => 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="mt-14 self-start md:absolute md:bottom-0 md:left-0 md:mt-0"
+                className="mt-8 self-start md:absolute md:bottom-0 md:left-0 md:mt-0"
             >
                 <h4 className="font-poppins text-[22px] font-medium">Featured Project</h4>
                 <h3 className="mt-2 font-mono text-3xl font-semibold">{project.title}</h3>

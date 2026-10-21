@@ -69,7 +69,7 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
                                                 project.images!.length === 1
                                                     ? 'mx-auto max-h-[60vh]'
                                                     : img.portrait
-                                                      ? 'h-[min(46vh,520px)] w-auto md:h-[min(60vh,520px)]'
+                                                      ? 'h-[min(36vh,320px)] w-auto md:h-[min(60vh,520px)]'
                                                       : // Wide shots take the full strip width, one per swipe
                                                         'max-h-[min(60vh,520px)] w-full'
                                             )}
